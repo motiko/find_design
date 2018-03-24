@@ -8,7 +8,11 @@
     "watchify": "watchify -t [ babelify  ] src/*.js -o build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["api", "react", "material-ui"],
+  "keywords": [
+    "api",
+    "react",
+    "material-ui"
+  ],
   "author": "Moti Korets",
   "license": "MIT",
   "devDependencies": {
@@ -21,6 +25,7 @@
   },
   "dependencies": {
     "material-ui": "^1.0.0-beta.38",
+    "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
