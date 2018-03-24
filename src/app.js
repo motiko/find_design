@@ -15,22 +15,49 @@ class App extends React.Component {
     super(props)
     this.state = {
       designObjects: mock_search().results,
-      searchInProgress: false
+      searchInProgress: false,
+      searchError: ''
     }
   }
 
   searchObjects = (query, availability) => {
     this.setState({ searchInProgress: true })
-    search(query, availability).then(response => {
-      this.setState({
-        designObjects: response.results,
-        searchInProgress: false
+    search(query, availability)
+      .then(response => {
+        this.setState({
+          designObjects: response.results,
+          searchInProgress: false,
+          searchError: ''
+        })
       })
-    })
+      .catch(err => {
+        this.setState({
+          designObjects: [],
+          searchError: err.message,
+          searchInProgress: false
+        })
+      })
+  }
+
+  errorMessage = () => {
+    if (this.state.searchError !== '') {
+      return (
+        <Typography variant="headline" color="error">
+          {`Sorry an error occured: ${this.state.searchError}`}
+        </Typography>
+      )
+    }
+    if (this.state.designObjects.length == 0) {
+      return (
+        <Typography variant="display1">
+          {'Sorry no results found, try another term'}
+        </Typography>
+      )
+    }
   }
 
   render() {
-    const { designObjects, searchInProgress } = this.state
+    const { designObjects, searchInProgress, searchError } = this.state
     return (
       <React.Fragment>
         <SearchBar handleSearch={this.searchObjects} />
@@ -42,14 +69,9 @@ class App extends React.Component {
           spacing={24}
           style={{ margin: '80 auto 0 auto', width: '90vw' }}
         >
-          {designObjects.length == 0 ? (
-            <Grid item xs={12} style={{ textAlign: 'center' }}>
-              <Typography variant="display1">
-                {' '}
-                Sorry no results found
-              </Typography>
-            </Grid>
-          ) : null}
+          <Grid item xs={12} style={{ textAlign: 'center' }}>
+            {this.errorMessage()}
+          </Grid>
           {designObjects.map((designObject, index) => (
             <Grid item xs={12} sm={6} xl={3} key={index}>
               <SmallDesignCard designObject={designObject} />

@@ -45509,9 +45509,11 @@ function search() {
   var color1 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
   var color2 = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
 
-  return fetch('http://search.spoonflower.com/searchv2/designs?utf8=%E2%9C%93&q=' + query + '&lang=en&availability=' + availability + '&substrate=all&sort=classic&view=design&offset=0&limit=' + limit + '&color_family1=' + color1 + '&color_family2=' + color2 + '&commit=Search').then(function (result) {
+  return fetch('https://search.spoonflower.com/searchv2/designs?utf8=%E2%9C%93&q=' + query + '&lang=en&availability=' + availability + '&substrate=all&sort=classic&view=design&offset=0&limit=' + limit + '&color_family1=' + color1 + '&color_family2=' + color2 + '&commit=Search').then(function (result) {
     if (result.ok) {
       return result.json();
+    } else {
+      throw Error(result.status + ': ' + result.statusText);
     }
   });
 }
@@ -45584,14 +45586,39 @@ var App = function (_React$Component) {
       (0, _api.search)(query, availability).then(function (response) {
         _this.setState({
           designObjects: response.results,
+          searchInProgress: false,
+          searchError: ''
+        });
+      }).catch(function (err) {
+        _this.setState({
+          designObjects: [],
+          searchError: err.message,
           searchInProgress: false
         });
       });
     };
 
+    _this.errorMessage = function () {
+      if (_this.state.searchError !== '') {
+        return _react2.default.createElement(
+          _typography2.default,
+          { variant: 'headline', color: 'error' },
+          'Sorry an error occured: ' + _this.state.searchError
+        );
+      }
+      if (_this.state.designObjects.length == 0) {
+        return _react2.default.createElement(
+          _typography2.default,
+          { variant: 'display1' },
+          'Sorry no results found, try another term'
+        );
+      }
+    };
+
     _this.state = {
       designObjects: (0, _api.mock_search)().results,
-      searchInProgress: false
+      searchInProgress: false,
+      searchError: ''
     };
     return _this;
   }
@@ -45601,7 +45628,8 @@ var App = function (_React$Component) {
     value: function render() {
       var _state = this.state,
           designObjects = _state.designObjects,
-          searchInProgress = _state.searchInProgress;
+          searchInProgress = _state.searchInProgress,
+          searchError = _state.searchError;
 
       return _react2.default.createElement(
         _react2.default.Fragment,
@@ -45615,16 +45643,11 @@ var App = function (_React$Component) {
             spacing: 24,
             style: { margin: '80 auto 0 auto', width: '90vw' }
           },
-          designObjects.length == 0 ? _react2.default.createElement(
+          _react2.default.createElement(
             _Grid2.default,
             { item: true, xs: 12, style: { textAlign: 'center' } },
-            _react2.default.createElement(
-              _typography2.default,
-              { variant: 'display1' },
-              ' ',
-              'Sorry no results found'
-            )
-          ) : null,
+            this.errorMessage()
+          ),
           designObjects.map(function (designObject, index) {
             return _react2.default.createElement(
               _Grid2.default,
@@ -46614,4 +46637,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[374,375,376,377]);
+},{}]},{},[374,375,376,377,378,379]);
