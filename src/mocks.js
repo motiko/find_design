@@ -850,29 +850,30 @@ export const searchResults = {
 }
 
 export const designObject = {
-  id: 509390,
-  name: 'Spoonflower Color Map',
+  id: 5600228,
+  name: 'Happy Camper || Wholecloth Quilt Top - Lumberjack collection',
   for_sale: true,
   for_sale_as_fabric: true,
-  for_sale_as_wallpaper: false,
-  for_sale_as_gift_wrap: null,
-  short_description:
-    'The Spoonflower Color Map is designed to fit on one yard of any fabric and is comprised of nearly 1500 individual colors.',
-  slug: '509390-spoonflower-color-map-by-spoonflower',
+  for_sale_as_wallpaper: true,
+  for_sale_as_gift_wrap: true,
+  short_description: '  © Copyright Jessica Prout ',
+  slug:
+    '5600228-happy-camper-wholecloth-quilt-top-lumberjack-collection-by-littlearrowdesign',
   thumbnail_url:
-    'https://s3.amazonaws.com/spoonflower/public/design_thumbnails/0050/9390/509390SF-ColorMap-2017_shop_thumb.png',
-  num_favorites: 1148,
+    'https://s3.amazonaws.com/spoonflower/public/design_thumbnails/0560/0228/rev5600228_rrrrwholecloth-11-11_shop_thumb.png',
+  num_favorites: 454,
   tags: [
-    'color',
-    'color map',
-    'color tool',
-    'color management',
-    'color chart',
-    'map'
+    'lumberjack',
+    'camping',
+    'wholecloth',
+    'patchwork',
+    'woodland',
+    'bear',
+    'baby boy'
   ],
   user: {
-    screen_name: 'spoonflower_help',
-    first_name: 'Spoonflower',
-    last_name: 'Help'
+    screen_name: 'littlearrowdesign',
+    first_name: 'Jessica',
+    last_name: 'Prout'
   }
 }
