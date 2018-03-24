@@ -1,8 +1,14 @@
 import { searchResults, designObject } from './mocks'
 
-export function search(query) {
+export function search(
+  query = '',
+  availability = 'for_sale',
+  limit = '30',
+  color1 = '',
+  color2 = ''
+) {
   return fetch(
-    'http://search.spoonflower.com/searchv2/designs?utf8=%E2%9C%93&q=&lang=en&availability=for_sale&substrate=all&sort=classic&view=design&offset=0&limit=30&color_family1=&color_family2=&commit=Search'
+    `http://search.spoonflower.com/searchv2/designs?utf8=%E2%9C%93&q=${query}&lang=en&availability=${availability}&substrate=all&sort=classic&view=design&offset=0&limit=${limit}&color_family1=${color1}&color_family2=${color2}&commit=Search`
   ).then(result => {
     if (result.ok) {
       return result.json()
