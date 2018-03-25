@@ -29,31 +29,29 @@ export class SearchBar extends React.Component {
     const { handleSearch } = this.props
     return (
       <AppBar>
-        <Toolbar>
-          <TextField
-            id="search"
-            type="text"
-            color="accent"
-            label="Find Design"
-            value={searchTerm}
-            onChange={this.updateSearchTerm}
-            onKeyUp={this.handleKey}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Tooltip title="Search">
-                    <IconButton
-                      color="default"
-                      onClick={() => handleSearch(searchTerm)}
-                    >
-                      <SearchIcon />
-                    </IconButton>
-                  </Tooltip>
-                </InputAdornment>
-              )
-            }}
-          />
-        </Toolbar>
+        <TextField
+          id="search"
+          type="text"
+          color="accent"
+          label="Find Design"
+          value={searchTerm}
+          onChange={this.updateSearchTerm}
+          onKeyUp={this.handleKey}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip title="Search">
+                  <IconButton
+                    color="default"
+                    onClick={() => handleSearch(searchTerm)}
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </Tooltip>
+              </InputAdornment>
+            )
+          }}
+        />
       </AppBar>
     )
   }
