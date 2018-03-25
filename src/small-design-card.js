@@ -10,7 +10,8 @@ import Button from 'material-ui/Button'
 import { withStyles } from 'material-ui/styles'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
-import ZoomIn from 'material-ui-icons/ZoomIn'
+import ZoomIn from 'material-ui-icons/ZoomOutMap'
+import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder'
 import { BigDesignCard } from './big-design-card'
 
 const styles = theme => ({
@@ -21,6 +22,9 @@ const styles = theme => ({
   media: {
     height: 173,
     width: 173
+  },
+  button: {
+    marginLeft: theme.spacing.unit * 2
   }
 })
 
@@ -56,6 +60,10 @@ class SmallDesignCardRaw extends React.Component {
           <CardActions className={classes.actions} disableActionSpacing>
             <IconButton aria-label="View Details" onClick={this.toggleDialog}>
               <ZoomIn />
+            </IconButton>
+            <IconButton className={classes.button} aria-label="Favorite">
+              <FavoriteBorderIcon />
+              {designObject.num_favorites}
             </IconButton>
           </CardActions>
         </Card>

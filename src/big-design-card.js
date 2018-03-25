@@ -10,7 +10,6 @@ import Button from 'material-ui/Button'
 import { withStyles } from 'material-ui/styles'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
-import FavoriteIcon from 'material-ui-icons/Favorite'
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder'
 import ShoppingCartIcon from 'material-ui-icons/ShoppingCart'
 import Dialog, {
