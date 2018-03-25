@@ -72,7 +72,7 @@ class App extends React.Component {
         <Grid
           container
           spacing={24}
-          style={{ margin: '80 auto 0 auto', width: '80vw' }}
+          style={{ margin: '0 auto 0 auto', width: '80vw' }}
           justify="space-around"
           alignments="center"
         >
