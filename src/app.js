@@ -20,9 +20,14 @@ class App extends React.Component {
     }
   }
 
-  searchObjects = (query, availability) => {
+  searchObjects = (
+    query = '',
+    availability = 'for_sale',
+    type = 'all',
+    sortBy = 'classic'
+  ) => {
     this.setState({ searchInProgress: true })
-    search(query, availability)
+    search(query, availability, type, sortBy)
       .then(response => {
         this.setState({
           designObjects: response.results,
