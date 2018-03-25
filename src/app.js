@@ -67,15 +67,15 @@ class App extends React.Component {
         <Grid
           container
           spacing={24}
-          style={{ margin: '80 auto 0 auto', width: '90vw' }}
+          style={{ margin: '80 auto 0 auto', width: '80vw' }}
+          justify="space-around"
+          alignments="center"
         >
           <Grid item xs={12} style={{ textAlign: 'center' }}>
             {this.errorMessage()}
           </Grid>
           {designObjects.map((designObject, index) => (
-            <Grid item xs={12} sm={6} xl={3} key={index}>
-              <SmallDesignCard designObject={designObject} />
-            </Grid>
+            <SmallDesignCard designObject={designObject} key={index} />
           ))}
         </Grid>
       </React.Fragment>

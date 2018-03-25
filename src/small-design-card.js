@@ -10,52 +10,63 @@ import Button from 'material-ui/Button'
 import { withStyles } from 'material-ui/styles'
 import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
-import FavoriteIcon from 'material-ui-icons/Favorite'
-import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder'
-import ShoppingCartIcon from 'material-ui-icons/ShoppingCart'
+import ZoomIn from 'material-ui-icons/ZoomIn'
+import { BigDesignCard } from './big-design-card'
 
 const styles = theme => ({
   card: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit * 3,
+    width: 173
   },
   media: {
-    height: 200
-  },
-  button: {
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2
+    height: 173,
+    width: 173
   }
 })
 
-export const SmallDesignCard = withStyles(styles)(
-  ({ designObject, classes }) => {
+class SmallDesignCardRaw extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { dialogOpen: false }
+  }
+
+  toggleDialog = () => {
+    this.setState(oldState => ({ dialogOpen: !oldState.dialogOpen }))
+  }
+
+  render() {
+    const { designObject, classes } = this.props
+    const { dialogOpen } = this.state
     return (
-      <Card className={classes.card} raised>
-        <CardHeader
-          title={designObject.name}
-          subheader={`by ${designObject.user.screen_name}`}
+      <React.Fragment>
+        <Card className={classes.card} raised>
+          <CardMedia
+            image={designObject.thumbnail_url}
+            title="Design"
+            className={classes.media}
+          />
+          <CardContent>
+            <Typography component="p" noWrap={true}>
+              {designObject.name}
+            </Typography>
+            <Typography variant="caption">
+              {`by ${designObject.user.screen_name}`}
+            </Typography>
+          </CardContent>
+          <CardActions className={classes.actions} disableActionSpacing>
+            <IconButton aria-label="View Details" onClick={this.toggleDialog}>
+              <ZoomIn />
+            </IconButton>
+          </CardActions>
+        </Card>
+        <BigDesignCard
+          designObject={designObject}
+          isOpen={dialogOpen}
+          onClose={this.toggleDialog}
         />
-        <CardMedia
-          image={designObject.thumbnail_url}
-          title="Design"
-          className={classes.media}
-        />
-        <CardContent>
-          <Typography component="p" className={classes.description}>
-            {designObject.short_description}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <IconButton className={classes.button} aria-label="Favorite">
-            <FavoriteBorderIcon />
-            {designObject.num_favorites}
-          </IconButton>
-          <IconButton className={classes.button} aria-label="Buy">
-            <ShoppingCartIcon />
-            Buy
-          </IconButton>
-        </CardActions>
-      </Card>
+      </React.Fragment>
     )
   }
-)
+}
+
+export const SmallDesignCard = withStyles(styles)(SmallDesignCardRaw)
